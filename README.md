@@ -1,4 +1,4 @@
-# vuee
+# fruit
 
 ## Project setup
 ```

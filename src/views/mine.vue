@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-<div class=''>我的</div>
+<div class='io'>我的</div>
 </template>
 
 <script>

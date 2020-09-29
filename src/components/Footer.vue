@@ -47,6 +47,7 @@ export default {
   bottom: 0;
   left: 0;
   border-top: 1px solid #cecece;
+  z-index: 100;
 }
 ul {
   height: 60px;
@@ -55,6 +56,7 @@ li {
   width: 33.33%;
   height: 60px;
   float: left;
+  background: white;
   line-height: 60px;
   text-align: center;
 }

@@ -8,24 +8,31 @@ const router = new VueRouter({
     routes: [{
         path: '/',
         redirect: '/index'
-    }, {
+    }, 
+    {
         path: '/index',
         name: 'Index',
         component: () =>
             import ("../views/fruitlist.vue")
     }, {
-        path: '/showcat',
-        name: 'Showcat',
+        path: '/cart',
+        name: 'Cart',
         component: () =>
-            import ("../views/showcat.vue")
+            import ("../views/cart.vue")
 
-    }, {
+    },
+    {
+        path:'/CartOrderFrom',
+        component:()=>import('../views/CartOrderFrom.vue')
+    },
+     {
         path: '/mine',
         name: 'Mine',
         component: () =>
             import ("../views/mine.vue")
 
-    }],
+    },
+],
     linkActiveClass: 'active'
 })
 

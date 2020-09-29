@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-<div class='io'>我的</div>
+<div class=''>详情页</div>
 </template>
 
 <script>
@@ -42,4 +42,5 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style scoped>
+
 </style>

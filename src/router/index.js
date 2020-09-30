@@ -16,11 +16,15 @@ const router = new VueRouter({
         path: '/index',
         name: 'Index',
         component: () =>
+<<<<<<< HEAD
             import ("../views/fruitlist.vue"),
         meta: {
             showFooter: true,
         }
 
+=======
+            import ("../views/index.vue")
+>>>>>>> 81c28415441b27dcc578c2917f01ae125ccb6249
     }, {
         path: '/showcat',
         name: 'Showcat',

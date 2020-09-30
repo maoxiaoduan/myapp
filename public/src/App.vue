@@ -2,7 +2,7 @@
   <div id="app">
     <Header></Header>
     <router-view></router-view>
-    <Footer v-show="$route.meta.showFooter"></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -17,16 +17,6 @@ Header,Footer
 }
 </script>
 
-<style lang="scss" >
-#app{
-  height: 100%;
-}
-//  .v-enter,
-//     .v-leave-to {
-//         transform: translateX(100%);
-//     }
-    
-//    .v-leave-active, .v-enter-active {
-//         transition: all .3s ease;
-//     }
+<style>
+
 </style>

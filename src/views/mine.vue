@@ -1,6 +1,5 @@
 <!--  -->
 <template>
-<<<<<<< HEAD
   <div id="mine">
     <div v-if="showlogin">
       <el-row>
@@ -22,9 +21,6 @@
       </el-row>
     </div>
   </div>
-=======
-<div class='io'>我的</div>
->>>>>>> 81c28415441b27dcc578c2917f01ae125ccb6249
 </template>
 
 <script>

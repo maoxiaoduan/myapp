@@ -2,6 +2,7 @@
 <template>
   <div class="footer">
     <ul>
+      <!-- <li>111</li> -->
       <router-link tag="li" to="/index">首页</router-link>
       <router-link tag="li" to="/showcat">购物车</router-link>
       <router-link tag="li" to="/mine">我的</router-link>

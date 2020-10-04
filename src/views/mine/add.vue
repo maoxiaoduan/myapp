@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-<div class=''></div>
+<div class='add'></div>
 </template>
 
 <script>

@@ -1,34 +1,35 @@
 <template>
   <div id="main">
-    <!-- <Header></Header> -->
+    <Header></Header>
     <div id="content">
       <div class="nav">
         <ul>
+          <li @click="getProducts" class="first">全部</li>
           <li
             v-for="item in typeList"
             :key="item._id"
             ref="navli"
             @click="changeLi($event, item._id)"
           >
-            {{ item.name }}
+            {{ item.kind }}
           </li>
         </ul>
       </div>
       <div class="proList">
         <ul>
-          <li v-for="(item, index) in proList" :key="item._id">
+          <li v-for="(item, index) in proList" :key="item._id" @click="getProById(item._id)">
             <div class="left">
-              <img src="../assets/img/水果.png" alt="" />
+              <img :src="item.imgUrl" />
             </div>
             <div class="right">
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.intro }}</p>
+              <h3>{{ item.titile }}</h3>
+              <p>{{ item.name }}</p>
               <i>￥</i><span>{{ item.price }}</span>
-              <div class="btn1" @click="changeFlag(index)" ref="btn1"></div>
+              <div class="btn1" @click.stop="changeFlag(index)" ref="btn1"></div>
               <div class="btn2" ref="btn2">
-                <div class="minus" @click="doMinus(index)">-</div>
+                <div class="minus" @click.stop="doMinus(index)">-</div>
                 <div class="num">{{ num }}</div>
-                <div class="plus" @click="doPlus">+</div>
+                <div class="plus" @click.stop="doPlus">+</div>
               </div>
             </div>
           </li>
@@ -36,19 +37,19 @@
         </ul>
       </div>
     </div>
-    <!-- <Footer></Footer> -->
+    <Footer></Footer> 
   </div>
 </template>
 
 <script>
-// import Header from "../components/Header";
-// import Footer from "../components/Footer";
+ import Header from "../components/Header";
+ import Footer from "../components/Footer";
 export default {
   name: "",
   props: {},
   components: {
-    // Header,
-    // Footer,
+    Header,
+    Footer,
   },
   data() {
     return {
@@ -60,12 +61,11 @@ export default {
   },
   methods: {
     getType() {
-      this.$http.get("/getType").then((res) => {
-        this.typeList = res.data.list;
+      this.$http.get("/fruit/getkind").then((res) => {
+        this.typeList = res.data.Kindlist
       });
     },
     changeFlag(index) {
-      console.log('aaa')
       console.log(index)
       for (let i = 0; i < this.$refs.btn1.length; i++) {
         this.$refs.btn1[i].style.display = "block";
@@ -93,19 +93,36 @@ export default {
       }
       e.target.className = "active";
       const typeId = id
-      this.getProducts(typeId)
+      this.getProductsByid(typeId)
     },
-    getProducts(typeId) {
+    getProducts() {
+      // for (let i = 0; i < this.$refs.navli.length; i++) {
+      //   this.$refs.navli[i].className = "";
+      // }
+      // this.$refs.navli[0].className = "active";
+      // console.log(this.$refs.navlii)
       this.$http
-        .get("/getProducts", {
-          params: {
-            typeId: typeId,
-          },
-        })
-        .then((res) => {
-          this.proList = res.data.list;
+        .get("/main/all").then((res) => {
+          this.proList = res.data.list
         });
     },
+    getProductsByid(typeId){
+       this.$http
+        .get("/main/all").then((res) => {
+          const list = res.data.list
+          const newList = []
+          console.log(typeId)
+          for(var i = 0; i < list.length; i++){
+            if(list[i].kind._id == typeId){
+              newList.push(list[i])
+            }
+          }
+          this.proList = newList
+        });
+    },
+    getProById(id){
+      this.$router.push(`/detail/${id}`)
+    }
   },
   created() {
     this.getType();

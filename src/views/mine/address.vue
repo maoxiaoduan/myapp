@@ -2,7 +2,7 @@
 <template>
   <div class="address">
     <van-nav-bar
-      title="标题"
+      title="收货地址列表"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
@@ -24,6 +24,7 @@
 //例如：import 《组件名称》 from '《组件路径》';
 import { AddressList, Toast, NavBar } from "vant";
 // Vue.use(AddressList);
+import store from '../../store/index'
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {
@@ -34,22 +35,18 @@ export default {
   data() {
     //这里存放数据
     return {
+      store,
       chosenAddressId: "1",
-      list: [
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
-          isDefault: true,
-        },
-        {
-          id: "2",
-          name: "李四",
-          tel: "1310000000",
-          address: "浙江省杭州市拱墅区莫干山路 50 号",
-        },
-      ],
+      list: store.state.address,
+      // [
+      //   {
+      //     id: "1",
+      //     name: "张三",
+      //     tel: "13000000000",
+      //     address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
+      //     isDefault: true,
+      //   }
+      // ],
       disabledList: [
         {
           id: "3",
@@ -66,8 +63,10 @@ export default {
   watch: {},
   //方法集合
   methods: {
+    
     onClickLeft() {
       history.go(-1);
+      console.log(this.list)
     },
     onAdd() {
     // history.go('/details')

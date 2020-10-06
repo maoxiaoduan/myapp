@@ -8,8 +8,8 @@
         </router-link>
       </el-row>
     </div>
-    <div class="ls" v-if="!showlogin">
-      <h3>当前用户：</h3>
+    <div class="ls" v-else>
+      <h3>当前用户：{{ list.name }}</h3>
       <!-- <transition name="v"> -->
       <router-link class="S2" to="/mine/address">
         <span class="S1">收货地址</span>
@@ -24,8 +24,10 @@
 </template>
 
 <script>
+// import { getToken, removeToken } from '../utils/auth';
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
+import Cookies from "js-cookie";
 
 export default {
   //import引入的组件需要注入到对象中才能使用
@@ -33,8 +35,9 @@ export default {
   data() {
     //这里存放数据
     return {
-      showlogin: false,
-      name: "",
+      showlogin: true,
+      // name: "",
+      list: {},
     };
   },
   //监听属性 类似于data概念
@@ -44,11 +47,18 @@ export default {
   //方法集合
   methods: {
     c1() {
+      Cookies.remove('user')
       this.showlogin = true;
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    this.list = JSON.parse(Cookies.get("user")); //取到cookie值是字符串格式，需要通过JSON.parse转换成对象的形式
+    if (Cookies.get("user")) {
+      this.name = Cookies.get("user").name;
+      this.showlogin = false;
+    }
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {}, //生命周期 - 创建之前

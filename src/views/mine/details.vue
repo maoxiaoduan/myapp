@@ -2,7 +2,7 @@
 <template>
   <div class="details">
     <van-nav-bar
-      title="标题"
+      title="修改"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
@@ -47,7 +47,9 @@ export default {
     onClickLeft() {
       history.go(-1);
     },
-    onSave() {},
+    onSave() {
+      
+    },
     onDelete() {},
      onChangeDetail(val) {
       if (val) {

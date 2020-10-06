@@ -3,7 +3,7 @@
   <div class="add">
     <div class="address">
       <van-nav-bar
-        title="标题"
+        title="地址列表破"
         left-text="返回"
         left-arrow
         @click-left="onClickLeft"

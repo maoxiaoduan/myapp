@@ -31,13 +31,18 @@
 </template>
 
 <script>
+// import { setToken } from "../utils/auth";
+
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
+import store from "../store/index";
+
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
+    store;
     //这里存放数据
     return {
       name: "",
@@ -54,9 +59,12 @@ export default {
       history.go(-1);
     },
     setcook() {
-      Cookies.set(this.name, this.password, { expires: 7 });
-        this.$router.push("/mine");
-      // this.$cookies.set(keyName, value[ , expireTimes[, path[, domain[, secure]]]])
+      Cookies.set('user',{name:this.name,password: this.password}, { expires: 7 });
+      console.log(Cookies.get(name))
+      // name(this.CON1.value);
+      // password(this.CON2.value);
+      // setToken("123123");
+      this.$router.push("/mine"); //跳转
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）

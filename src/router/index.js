@@ -20,6 +20,7 @@ const router = new VueRouter({
                 import ("../views/fruitlist.vue"),
             meta: {
                 showFooter: true,
+                showHeader: true
             }
         },
         {
@@ -30,7 +31,6 @@ const router = new VueRouter({
             meta: {
                 showFooter: true,
             }
-
         }, {
             path: '/mine',
             name: 'Mine',
@@ -40,21 +40,25 @@ const router = new VueRouter({
                 showFooter: true,
             }
 
-        }, {
+        },
+        {
             path: '/login',
             name: 'Login',
             component: () =>
                 import ("../views/login.vue"),
             meta: {
                 showFooter: false,
+                // requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             }
-        }, {
+        },
+        {
             path: '/mine/address',
             name: 'Address',
             component: () =>
                 import ("../views/mine/address.vue"),
             meta: {
                 showFooter: false,
+                // requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             }
         }, {
             path: '/mine/details',
@@ -63,6 +67,7 @@ const router = new VueRouter({
                 import ("../views/mine/details.vue"),
             meta: {
                 showFooter: false,
+                // requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             }
         }
     ],

@@ -1,11 +1,12 @@
 <template>
   <div id="main">
     <div class="header">
-      <mt-header fixed title="商品详情" class="top">
-        <router-link to="/" slot="left">
-          <mt-button icon="back">返回</mt-button>
-        </router-link>
-      </mt-header>
+      <van-nav-bar class="top"
+        title="商品详情"
+        left-text="返回"
+        left-arrow
+        @click-left="onClickLeft"
+      />
     </div>
     <div id="content">
       <div class="proImg">
@@ -17,6 +18,12 @@
         <i>￥</i><span>{{ product.price }}</span>
       </div>
       <div class="desc">
+        <p>{{ product.titile }}</p>
+        <p>{{ product.titile }}</p>
+        <p>{{ product.titile }}</p>
+        <p>{{ product.titile }}</p>
+        <p>{{ product.titile }}</p>
+        <p>{{ product.titile }}</p>
         <p>{{ product.titile }}</p>
         <p>{{ product.titile }}</p>
         <p>{{ product.titile }}</p>
@@ -41,6 +48,13 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { NavBar, GoodsAction, GoodsActionIcon, GoodsActionButton } from "vant";
+
+Vue.use(NavBar);
+Vue.use(GoodsAction);
+Vue.use(GoodsActionButton);
+Vue.use(GoodsActionIcon);
 export default {
   name: "",
   props: {},
@@ -51,9 +65,14 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     getProById() {
-      const id = this.$route.params.id;
+      const id = this.$route.query.id;
+      console.log(id);
       this.$http.get(`/main/getthis/${id}`).then((res) => {
+        console.log(res);
         this.product = res.data.list;
         this.product.imgUrl = "http://localhost:8080/" + this.product.imgUrl;
       });
@@ -71,11 +90,13 @@ export default {
 
 <style scoped>
 .header .top {
-  height: 50px;
+  width: 100%;
+  height: 50px; 
+  position: fixed;left: 0;top: 0;
 }
 #content {
   margin-top: 50px;
-  height: 1000px;
+  /* height: 1000px; */
 }
 .proImg {
   height: 200px;

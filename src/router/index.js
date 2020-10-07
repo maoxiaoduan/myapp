@@ -24,6 +24,16 @@ const router = new VueRouter({
             }
         },
         {
+            path: '/detail',
+            name: 'Detail',
+            component: () =>
+                import ("../views/detail.vue"),
+            meta: {
+                showFooter: false,
+                showHeader: false
+            }
+        },
+        {
             path: '/showcat',
             name: 'Showcat',
             component: () =>

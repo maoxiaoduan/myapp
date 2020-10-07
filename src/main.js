@@ -8,9 +8,9 @@ import request from './utils/request';
 import axios from 'axios';
 import store from './store/index'
 
+
 Vue.config.productionTip = false;
 Vue.prototype.$http = request;
-Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
 Vue.use(Vuex);
 Vue.use(ElementUI);

@@ -9,12 +9,13 @@ import request from './utils/request';
 import axios from 'axios';
 import store1 from './store/index'
 
+
 Vue.config.productionTip = false;
 Vue.prototype.$http = request;
-Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
 Vue.use(Vuex);
 Vue.use(ElementUI);
+
 const ADD_COUNT = 'ADD_COUNT'; // 用常量代替事件类型，使得代码更清晰
 const REMOVE_COUNT = 'REMOVE_COUNT';
 //注册状态管理全局参数

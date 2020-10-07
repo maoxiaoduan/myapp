@@ -1,9 +1,14 @@
 <template>
   <div id="main">
-    <!-- <Header></Header> -->
     <div id="content">
       <div class="nav">
         <ul>
+          <li
+            @click="changeLi($event, '5f72d50e2bfe2f07cccefd1e')"
+            ref="navall"
+          >
+            全部
+          </li>
           <li
             v-for="item in typeList"
             :key="item._id"
@@ -14,42 +19,41 @@
           </li>
         </ul>
       </div>
-      <div class="proList">
-        <ul>
-          <li v-for="(item, index) in proList" :key="item._id">
-            <div class="left">
-              <img :src="item.imgUrl" />
-            </div>
-            <div class="right">
-              <h3>{{ item.titile }}</h3>
-              <p>{{ item.name }}</p>
-              <i>￥</i><span>{{ item.price }}</span>
-              <div class="btn1" @click="changeFlag(index)" ref="btn1"></div>
-              <div class="btn2" ref="btn2">
-                <div class="minus" @click="doMinus(index)">-</div>
-                <div class="num">{{ num }}</div>
-                <div class="plus" @click="doPlus">+</div>
+      <transition>
+        <div class="proList">
+          <ul>
+            <li
+              v-for="(item, index) in proList"
+              :key="item._id"
+              @click="goDetail(item._id)"
+            >
+              <div class="left">
+                <img :src="item.imgUrl" />
               </div>
-            </div>
-          </li>
-          <li></li>
-        </ul>
-      </div>
+              <div class="right">
+                <h3>{{ item.titile }}</h3>
+                <p>{{ item.name }}</p>
+                <i>￥</i><span>{{ item.price }}</span>
+                <div class="btn1" @click="changeFlag(index)" ref="btn1"></div>
+                <div class="btn2" ref="btn2">
+                  <div class="minus" @click="doMinus(index)">-</div>
+                  <div class="num">{{ num }}</div>
+                  <div class="plus" @click="doPlus">+</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </transition>
     </div>
-    <!-- <Footer></Footer> -->
   </div>
 </template>
 
 <script>
-// import Header from "../components/Header";
-// import Footer from "../components/Footer";
 export default {
   name: "",
   props: {},
-  components: {
-    // Header,
-    // Footer,
-  },
+  components: {},
   data() {
     return {
       curIndex: "",
@@ -61,12 +65,10 @@ export default {
   methods: {
     getType() {
       this.$http.get("/fruit/getkind").then((res) => {
-        this.typeList = res.data.Kindlist
+        this.typeList = res.data.Kindlist;
       });
     },
     changeFlag(index) {
-      console.log('aaa')
-      console.log(index)
       for (let i = 0; i < this.$refs.btn1.length; i++) {
         this.$refs.btn1[i].style.display = "block";
       }
@@ -91,23 +93,45 @@ export default {
       for (let i = 0; i < this.$refs.navli.length; i++) {
         this.$refs.navli[i].className = "";
       }
+      this.$refs.navall.className = "";
       e.target.className = "active";
-      const typeId = id
-      this.getProducts(typeId)
+      const typeId = id;
+      this.getProducts(typeId);
     },
-    getProducts() {
-      this.$http
-        .get("/main/all").then((res) => {
-          this.proList = res.data.list
-          console.log(res)
+    getProducts(typeid) {
+      if (typeid == "5f72d50e2bfe2f07cccefd1e") {
+        this.$http.get("/main/all").then((res) => {
+          this.proList = res.data.list;
         });
+      } else {
+        const newList = [];
+        this.$http.get("/main/all").then((res) => {
+          this.proList = res.data.list;
+          for (let i = 0; i < this.proList.length; i++) {
+            if (typeid == this.proList[i].kind._id) {
+              newList.push(this.proList[i]);
+            }
+          }
+          this.proList = newList;
+        });
+      }
+    },
+    goDetail(proid) {
+      this.$router.push({
+        path: "/detail",
+        query: {
+          id: proid,
+        },
+      });
     },
   },
   created() {
     this.getType();
     this.getProducts("5f72d50e2bfe2f07cccefd1e");
   },
-  mounted() {},
+  mounted() {
+    this.$refs.navall.className = "active";
+  },
   watch: {},
   computed: {},
   filters: {},
@@ -115,11 +139,19 @@ export default {
 </script>
 
 <style scoped>
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(150px);
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.8s ease;
+}
 #content {
   /* height: calc(100% - 110px); */
   margin: 50px 0px 60px 0px;
   overflow-y: auto;
-
 }
 /* 导航栏 */
 .nav {

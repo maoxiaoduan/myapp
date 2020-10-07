@@ -17,10 +17,20 @@ const router = new VueRouter({
             path: '/index',
             name: 'Index',
             component: () =>
-                import ("../views/fruitlist.vue"),
+                import ("../views/index.vue"),
             meta: {
                 showFooter: true,
                 showHeader: true
+            }
+        },
+        {
+            path: '/detail',
+            name: 'Detail',
+            component: () =>
+                import ("../views/detail.vue"),
+            meta: {
+                showFooter: false,
+                showHeader: false
             }
         },
         {

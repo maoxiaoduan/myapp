@@ -44,7 +44,7 @@
   top: 0;
   left: 0;
   text-align: center;
-  background-color: salmon;
+  background-color: #fff;
   z-index: 1;
 }
 p{

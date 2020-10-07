@@ -24,7 +24,7 @@
 //例如：import 《组件名称》 from '《组件路径》';
 import { AddressList, Toast, NavBar } from "vant";
 // Vue.use(AddressList);
-import store from '../../store/index'
+import store from "../../store/index";
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {
@@ -38,15 +38,6 @@ export default {
       store,
       chosenAddressId: "1",
       list: store.state.address,
-      // [
-      //   {
-      //     id: "1",
-      //     name: "张三",
-      //     tel: "13000000000",
-      //     address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
-      //     isDefault: true,
-      //   }
-      // ],
       disabledList: [
         {
           id: "3",
@@ -58,24 +49,35 @@ export default {
     };
   },
   //监听属性 类似于data概念
-  computed: {},
+  computed: {
+    addressData() {
+      //拿到了store中的地址列表
+      return this.$store.state.address;
+    },
+  },
   //监控data中的数据变化
   watch: {},
   //方法集合
   methods: {
-    
     onClickLeft() {
       history.go(-1);
-      console.log(this.list)
     },
     onAdd() {
-    // history.go('/details')
-    this.$router.push('/mine/details')
-    //   Toast("/mine/details");
+      // this.$router.push("/mine/add");
+      this.$router.push({
+        path: "/mine/add",
+        query: {
+          data: this.$store.state.address.length,
+        },
+      });
     },
     onEdit(item, index) {
-    this.$router.push('/mine/details?='+ index)
-
+      this.$router.push({
+        path: "/mine/details",
+        query: {
+          data: index,
+        },
+      });
     },
     goBack() {
       history.go(-1);
@@ -96,5 +98,4 @@ export default {
 </script>
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
-
 </style>

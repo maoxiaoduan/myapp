@@ -17,7 +17,7 @@ const router = new VueRouter({
             path: '/index',
             name: 'Index',
             component: () =>
-                import ("../views/fruitlist.vue"),
+                import ("../views/index.vue"),
             meta: {
                 showFooter: true,
                 showHeader: true
@@ -65,6 +65,15 @@ const router = new VueRouter({
             name: 'Details',
             component: () =>
                 import ("../views/mine/details.vue"),
+            meta: {
+                showFooter: false,
+                // requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+            }
+        }, {
+            path: '/mine/add',
+            name: 'Add',
+            component: () =>
+                import ("../views/mine/add.vue"),
             meta: {
                 showFooter: false,
                 // requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的

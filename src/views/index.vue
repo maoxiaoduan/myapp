@@ -1,9 +1,10 @@
 <template>
   <div id="main">
-    <!-- <Header></Header> -->
+    <Header></Header>
     <div id="content">
       <div class="nav">
         <ul>
+          <li @click="getProducts" class="first">全部</li>
           <li
             v-for="item in typeList"
             :key="item._id"
@@ -16,7 +17,8 @@
       </div>
       <div class="proList">
         <ul>
-          <li v-for="(item, index) in proList" :key="item._id">
+          <li v-for="(item, index) in proList" :key="item._id" :num="index"></li>
+          <li v-for="(item, index) in proList" :key="item._id" @click="getProById(item._id)">
             <div class="left">
               <img :src="item.imgUrl" />
             </div>
@@ -24,31 +26,30 @@
               <h3>{{ item.titile }}</h3>
               <p>{{ item.name }}</p>
               <i>￥</i><span>{{ item.price }}</span>
-              <div class="btn1" @click="changeFlag(index)" ref="btn1"></div>
+              <div class="btn1" @click.stop="changeFlag(index)" ref="btn1"></div>
               <div class="btn2" ref="btn2">
                 <div class="minus" @click="doMinus(index)">-</div>
                 <div class="num">{{ num }}</div>
                 <div class="plus" @click="doPlus">+</div>
-              </div>
+            </div>
             </div>
           </li>
-          <li></li>
         </ul>
       </div>
-    </div>
-    <!-- <Footer></Footer> -->
+    <Footer></Footer>
+  </div>
   </div>
 </template>
 
 <script>
-// import Header from "../components/Header";
-// import Footer from "../components/Footer";
+ import Header from "../components/Header";
+ import Footer from "../components/Footer";
 export default {
   name: "",
   props: {},
   components: {
-    // Header,
-    // Footer,
+    Header,
+    Footer,
   },
   data() {
     return {

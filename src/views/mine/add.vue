@@ -48,7 +48,8 @@ export default {
   //方法集合
   methods: {
     onClickLeft() {
-      history.go(-1);
+           this.$router.push('/mine/address')
+
     },
     onSave(content) {
       let addr = new Object();

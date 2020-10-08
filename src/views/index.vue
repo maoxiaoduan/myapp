@@ -1,10 +1,8 @@
 <template>
   <div id="main">
-    <Header></Header>
     <div id="content">
       <div class="nav">
         <ul>
-          <li @click="getProducts" class="first">全部</li>
           <li
             @click="changeLi($event, '5f72d50e2bfe2f07cccefd1e')"
             ref="navall"
@@ -46,15 +44,14 @@
             </li>
           </ul>
         </div>
-    <Footer></Footer>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
- import Header from "../components/Header";
- import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 export default {
   name: "",
   props: {},

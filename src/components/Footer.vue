@@ -62,7 +62,7 @@ li {
   text-align: center;
 }
 .active {
-        background-color: #070605af;
+        background-color: #000000;
         color: white;
         font-weight: 500;
     }

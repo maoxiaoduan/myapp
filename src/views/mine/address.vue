@@ -60,10 +60,9 @@ export default {
   //方法集合
   methods: {
     onClickLeft() {
-      history.go(-1);
+      this.$router.push('/mine')
     },
     onAdd() {
-      // this.$router.push("/mine/add");
       this.$router.push({
         path: "/mine/add",
         query: {

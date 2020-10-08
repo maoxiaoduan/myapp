@@ -71,16 +71,45 @@ export default {
         city: dizhi.city,
         county: dizhi.county,
         areaCode: dizhi.area_code,
-        address: dizhi.address,
+        addressDetail: dizhi.address,
         postal_code: dizhi.postal_code,
+        // isDefault:dizhi.isDefault,
       };
-      console.log(this.AddressInfo);
+      // console.log(this.AddressInfo);
     },
     onClickLeft() {
-      history.go(-1);
+      this.$router.push("/mine/address");
     },
-    onSave() {},
-    onDelete() {},
+    //修改地址
+    onSave(details) {
+      // this.getinit(){
+      console.log(this.AddressInfo)
+      this.AddressInfo = {
+        id:details.id,
+        name:details.name,
+        tel:details.tel,
+        province:details.province,
+        city:details.city,
+        county:details.county,
+        areaCode:details.areaCode,
+        address:details.addressDetail,
+        postal_code:details.postal_code,
+        // isDefault:dizhi.isDefault,
+      };
+      console.log(this.AddressInfo);
+      this.$store.state.address.splice(this.$route.query.data,1,this.AddressInfo)
+      console.log(this.$store.state.address);
+      this.$router.push("/mine/address");
+
+      // }
+    },
+    //删除地址
+    onDelete() {
+      // console.log(this.$route.query.data)
+      // console.log(this.$store.state.address)
+      this.$store.state.address.splice(this.$route.query.data, 1);
+      this.$router.push("/mine/address");
+    },
     onChangeDetail(val) {
       if (val) {
         this.searchResult = [

@@ -53,9 +53,9 @@ export default {
     },
     onSave(content) {
       let addr = new Object();
-      console.log("content");
-      console.log(content);
-      console.log(this.$route.query.data)
+      // console.log("content");
+      // console.log(content);
+      // console.log(this.$route.query.data)
       let len = this.$route.query.data + 1;
       addr = {
         id: len,
@@ -72,6 +72,7 @@ export default {
           content.city +
           content.county +
           content.addressDetail,
+         address1: content.addressDetail,
       };
       let is_add = this.$store.state.address.push(addr);
       

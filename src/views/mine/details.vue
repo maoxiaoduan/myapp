@@ -61,8 +61,8 @@ export default {
   //方法集合
   methods: {
     getinit() {
-      const id = this.$route.query.data;
-      const dizhi = this.list[id];
+      let id = this.$route.query.data;
+      let dizhi = this.list[id];
       this.AddressInfo = {
         id: id,
         name: dizhi.name,
@@ -71,33 +71,47 @@ export default {
         city: dizhi.city,
         county: dizhi.county,
         areaCode: dizhi.area_code,
-        addressDetail: dizhi.address,
+        addressDetail: dizhi.address1,
         postal_code: dizhi.postal_code,
-        // isDefault:dizhi.isDefault,
+        isDefault: dizhi.is_default == 1,
+        address1: dizhi.address1,
       };
-      // console.log(this.AddressInfo);
+      console.log(this.AddressInfo);
     },
     onClickLeft() {
       this.$router.push("/mine/address");
     },
     //修改地址
     onSave(details) {
-      // this.getinit(){
-      console.log(this.AddressInfo)
+      console.log(
+        this.AddressInfo["addressDetail"],
+        details.addressDetail,
+        details.city,
+        details.county
+      );
+      // details.addressDetail='';
+      let dizhi = this.list[this.$route.query.data]["address1"];
+      dizhi = details.addressDetail;
       this.AddressInfo = {
-        id:details.id,
-        name:details.name,
-        tel:details.tel,
-        province:details.province,
-        city:details.city,
-        county:details.county,
-        areaCode:details.areaCode,
-        address:details.addressDetail,
-        postal_code:details.postal_code,
-        // isDefault:dizhi.isDefault,
+        id: this.$route.query.data,
+        name: details.name,
+        tel: details.tel,
+        province: details.province,
+        city: details.city,
+        county: details.county,
+        area_code: details.areaCode,
+        address1:dizhi,
+        address: details.province + details.city + details.county + dizhi,
+        postal_code: details.postal_code,
+        isDefault: details.is_default == 1,
       };
-      console.log(this.AddressInfo);
-      this.$store.state.address.splice(this.$route.query.data,1,this.AddressInfo)
+      // console.log(this.AddressInfo);
+      console.log(this.AddressInfo["address"]);
+      this.$store.state.address.splice(
+        this.$route.query.data,
+        1,
+        this.AddressInfo
+      );
       console.log(this.$store.state.address);
       this.$router.push("/mine/address");
 
